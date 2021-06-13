@@ -43,23 +43,25 @@ rather than storing the numbers in seperate registries
 
 The instruction syntax is very simple
 
-multi argument instructions
-```INSTRUCTION:ARGUMENT1,ARGUMENT2```
-e.g
-```SET:R1,"Hello world"```
+multi argument instructions    
+```INSTRUCTION:ARGUMENT1,ARGUMENT2```    
+e.g    
+```SET:R1,"Hello world"```    
 
-single argument instructions:
-```INSTRUCTION:ARGUMENT1```
-e.g
-```SLP:0.5```
 
-no argument instruction (none currently present)
-```INSTRUCTION```
+single argument instructions:    
+```INSTRUCTION:ARGUMENT1```    
+e.g    
+```SLP:0.5```   
 
-and a special case for the 'instruction' of the label
-```{LABEL_NAME}```
-and later can be referenced in jmp instructions like
-```JMP:LABEL_NAME```
+
+no argument instruction (none currently present)    
+```INSTRUCTION```    
+
+and a special case for the 'instruction' of the label    
+```{LABEL_NAME}```    
+and later can be referenced in jmp instructions like    
+```JMP:LABEL_NAME```    
 
 
 ### Current instruction set is
