@@ -39,6 +39,29 @@ ADDR:10,10,R10
 
 rather than storing the numbers in seperate registries
 
+### Syntax
+
+The instruction syntax is very simple
+
+multi argument instructions
+```INSTRUCTION:ARGUMENT1,ARGUMENT2```
+e.g
+```SET:R1,"Hello world"```
+
+single argument instructions:
+```INSTRUCTION:ARGUMENT1```
+e.g
+```SLP:0.5```
+
+no argument instruction (none currently present)
+```INSTRUCTION```
+
+and a special case for the 'instruction' of the label
+```{LABEL_NAME}```
+and later can be referenced in jmp instructions like
+```JMP:LABEL_NAME```
+
+
 ### Current instruction set is
 
 **SET**:ALIAS,ANY X | Sets the value of ALIAS to ANY X
