@@ -164,7 +164,7 @@ function instructionSet.new(cpu)
         DIV = {--Integer divides x y, saves to z
             arg = {'any', 'any', 'alias'},
             func = function (x, y, regZ)
-                cpu:setRegister(regZ, math.floor(x / y))
+                cpu:setRegister(regZ, x / y)
             end
         },
         MOD = {--Integer divides x y, saves remenant to z
@@ -239,7 +239,7 @@ function instructionSet.new(cpu)
                 end
             end
         },
-        CMPN = {--Sets register C to Z if x==y
+        CMPN = {--Sets register C to Z if x!=y
             arg = {'any','any','any','alias'},
             func = function (x, y, c, z)
                 if not x == y then
