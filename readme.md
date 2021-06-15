@@ -12,7 +12,7 @@
 
 ### Communication with external 'device'
 
-![Fibonacci](https://j.gifs.com/A6nYRp.gif)
+![External bus device](https://j.gifs.com/A6nYRp.gif)
 
 The instruction set is defined in is.lua
 While the cpu's 'functionality' is defined in cpu.lua
@@ -99,3 +99,34 @@ and later can be referenced in jmp instructions like
 **CCAT**:ALIAS A | Concatenates the current stack and places the result in to A
 
 **SUM**:ALIAS A | Sums the value of the stack and places the result in to A
+
+
+### Available registers:
+
+**Hardcoded:**
+
+These first 2 are possibly deprecated in 
+
+RMA - Register memory address
+
+Sets the memory address for access
+
+RMD - Register memory data
+
+This will contain the current data for the current memory address set by (RMA)
+
+
+RDBA - Register Device bus address
+
+Points the device bus at desired device
+
+RDMA - Register Device memory address
+
+Points to the desired memory address for the active RDBA device
+
+RDMD - Register Device memory data
+
+Contains data from the RDBA device on the RDMA address, can be set or get like a regular register for manipulation
+
+
+R1 - R10 Are the default general purpose registers, but more can be set in cpu.lua with gpRegisterAmount variable

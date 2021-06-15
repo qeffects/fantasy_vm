@@ -1,13 +1,14 @@
 love.window.setMode(1280, 720)
-local CPU = require('cpu')
 local IS = require('is')
-local cpu = require "cpu"
+local CPU = require('cpu')
 local localCpu = CPU.new(IS)
+
 local dummy = require('devices.dummy')
 local localDummy = dummy.new()
 
 local font = love.graphics.newFont('RobotoMono-Regular.ttf', 26)
 local fontSmall = love.graphics.newFont('RobotoMono-Regular.ttf', 12)
+
 local fontSize = 26
 
 local code = {
