@@ -13,6 +13,8 @@ instructionSet.__index = instructionSet
 local function parseInstruction(str, IS)
     local f = str:find(':')
 
+	str = str:gsub('[ ]?//.+','')
+
     if f then
         --Arg'd path
         local cmd = str:sub(1, f-1)
@@ -140,7 +142,7 @@ local function parseInstruction(str, IS)
         if labelMark and endMark then
             return IS.__LABEL
         else
-            return IS[str] or false, 'no such instruction: '..str
+            return IS[str] or IS.__LABEL
         end
     end
 end
@@ -174,7 +176,7 @@ function instructionSet.new(cpu)
             end
         },
         ADD = {--Adds the value of RegX to RegX + Val
-            arg = {'alias', 'number'},
+            arg = {'alias', 'any'},
             func = function (regX, val)
                 local x = cpu:getRegister(regX)
 

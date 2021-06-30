@@ -34,7 +34,19 @@ return helium(function (param, view)
 			else
 				lg.setColor(1, 1, 1)
 			end
-			lg.print(contents, 25, (i)*style.bigFontSize+5)
+			if contents:find('//') then
+
+				local noComment = contents:gsub('[ ]?//.+','')
+				local w2 = style.bigFont:getWidth(noComment)
+				local loc = contents:find('[ ]?//')
+				local comment = contents:sub(loc)
+
+				lg.print(noComment, 25, (i)*style.bigFontSize+5)
+				lg.setColor(0.1,0.5,0.1)
+				lg.print(comment, 25+w2, (i)*style.bigFontSize+5)
+			else
+				lg.print(contents, 25, (i)*style.bigFontSize+5)
+			end
 		end
 	end
 end)

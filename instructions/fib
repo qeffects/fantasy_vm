@@ -1,0 +1,24 @@
+//Initializes all the registers
+SET:R1,1
+SET:R2,1
+SET:R3,1
+SET:R4,1
+SET:R5,1
+{LOOP}
+//Sets the Register Memory Address to R5
+MOV:R5,RMA
+//Sets the Register Memory Data to R3
+MOV:R3,RMD
+ADDR:R1,R2,R3
+MOV:R1,R2
+MOV:R3,R1
+//Increments loop register
+ADD:R5,1
+//Checks if the loop register < 20
+CMPL:R5,19,0,R4
+SLP:0.5
+//Jumps to {LOOP} if R4 == 1
+JMPI:R4,LOOP
+MOV:R5,RMA
+MOV:R3,RMD
+SLP:5

@@ -1,0 +1,3 @@
+SET:R1,2 //Sets register R1 to 2
+SET:R2,2 //Sets register R2 to 2
+ADD:R1,R2 //Adds R1 and R2, stores in R1

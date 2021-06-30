@@ -27,7 +27,7 @@ local function stepF()
 end
 
 local function slowF()
-	UPDATE_TIME = 0.333 
+	UPDATE_TIME = 0.7
 end
 
 local function fastF()
@@ -41,14 +41,17 @@ return helium(function (param, view)
 	local step = btnFac({text = '1', callback = stepF}, 40, 40)
 	local slow = btnFac({text = '>', callback = slowF}, 40, 40)
 	local fast = btnFac({text = '>>', callback = fastF}, 40, 40)
+
 	return function()
+		local leftover = (view.w - (50*4))/4
+
 		lg.setColor(style.baseColor)
 		lg.rectangle('fill',0,0,view.w,view.h)
 		lg.setColor(style.accentColor)
 		lg.rectangle('line',0,0,view.w,view.h)
-		stop:draw(5,5)
-		step:draw(50,5)
-		slow:draw(100,5)
-		fast:draw(150,5)
+		stop:draw(0+leftover,5)
+		step:draw(50+leftover*2,5)
+		slow:draw(100+leftover*3,5)
+		fast:draw(150+leftover*4,5)
 	end
 end)

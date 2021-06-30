@@ -10,8 +10,10 @@ local memoryFactory = require('ui.memory')
 local opcodeFactory = require('ui.opcode')
 local statusFactory = require('ui.status')
 local cpuSpeedFactory = require('ui.cpuSpeed')
+local busDeviceFactory = require('ui.busDevice')
 local registersFactory = require('ui.registers')
 local verticalTrackFactory = require('ui.verticalTrack')
+local collapsibleFactory = require('ui.collapsibleStack')
 
 local style = {
 	bigFont = love.graphics.newFont('RobotoMono-Regular.ttf', 26),
@@ -46,6 +48,7 @@ return helium(function (param, view)
 		statusDetails = param.cpu.statusDetails,
 		frequency = param.cpu.frequency,
 		peakfrequency = param.cpu.peakfrequency,
+		cpuCounter = param.cpu.oldProgCounter,
 	})
 
 	local cpuContext = context.use('cpu',{
@@ -53,6 +56,7 @@ return helium(function (param, view)
 		registers = param.cpu.gpRegisters,
 		devices = param.cpu.devices,
 		cpu = param.cpu,
+		busDevice = param.busDevice,
 		flipflop = false,
 	})
 
@@ -65,25 +69,35 @@ return helium(function (param, view)
 		cpuStateContext.statusDetails = param.cpu.statusDetails
 		cpuStateContext.frequency = param.cpu.frequency
 		cpuStateContext.peakfrequency = param.cpu.peakfrequency
+		cpuStateContext.cpuCounter = param.cpu.oldProgCounter
 	end)
 
-	local deviceElement = deviceFactory({}, 10, 30)
-	local memoryElement = memoryFactory({}, 10, 30)
+	local deviceElement = deviceFactory({}, 10, 1)
+	local memoryElement = memoryFactory({}, 10, 1)
 	local cpuSpeedElement = cpuSpeedFactory({}, 10, 50)
 	local opcodeElement = opcodeFactory({}, 10, 50, {opcode = true})
 	local statusElement = statusFactory({}, 10, 10)
 	local registersElement = registersFactory({}, 10, 10)
+	local busDeviceElement = busDeviceFactory({}, 10, 10)
+
+	local deviceCollapser = collapsibleFactory({child = deviceElement, title = 'Bus Devices', defaultOpen = true}, 10, 10)
+	local memoryCollapser = collapsibleFactory({child = memoryElement, title = 'Memory', defaultOpen = true}, 10, 10)
+	local statusCollapser = collapsibleFactory({child = statusElement, title = 'CPU State', defaultOpen = true}, 10, 10)
+	local registersCollapser = collapsibleFactory({child = registersElement, title = 'Registers', defaultOpen = true}, 10, 10)
+	local busDeviceCollapser = collapsibleFactory({child = busDeviceElement, title = 'Bus device', defaultOpen = false}, 10, 10)
+
 	local trackOne = verticalTrackFactory({
 		children = {
-			registersElement,
-			statusElement,
-			cpuSpeedElement
+			cpuSpeedElement,
+			registersCollapser,
+			statusCollapser,
 		}
 	}, 10, 10, {trackOne = true})
 	local trackTwo = verticalTrackFactory({
 		children = {
-			memoryElement,
-			deviceElement,
+			memoryCollapser,
+			deviceCollapser,
+			busDeviceCollapser
 		}
 	}, 10, 10, {trackTwo = true})
 
