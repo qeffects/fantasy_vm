@@ -7,7 +7,7 @@ local dummy = require('devices.dummy')
 local localDummy = dummy.new()
 
 local helium = require('helium')
-local scene = helium.scene.new(false)
+local scene = helium.scene.new(true)
 scene:activate()
 
 local root = require('ui.root')({cpu = localCpu, busDevice = localDummy},800, 600)

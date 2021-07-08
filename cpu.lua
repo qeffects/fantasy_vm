@@ -63,7 +63,21 @@ function cpu:load(instructions)
 
     --Point to the first instruction
     self.programCounter = 1
+
+	--Reset the memory and registers to empty 
+	self.memory = {}
     
+    for i = 1, gpRegisterAmount do
+        self.gpRegisters['R'..i] = {data = false}
+    end
+
+    self.gpRegisters['RMA'] = {data = false}
+    self.gpRegisters['RMD'] = {data = false}
+
+    self.gpRegisters['RDBA'] = {data = false}
+    self.gpRegisters['RDMA'] = {data = false}
+    self.gpRegisters['RDMD'] = {data = false}
+
     --Reset any crashed text
     self.statusDetails = ''
 
